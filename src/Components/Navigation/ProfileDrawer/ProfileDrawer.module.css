@@ -1,0 +1,47 @@
+@import '../../../Shared/CssVars.css';
+
+.Open {
+    transform: translateX(0);
+}
+
+.Close {
+    transform: translateX(100%);
+}
+
+.ProfileDrawer {
+    z-index: 200;
+    position: fixed;
+    right: 0;
+    width: 200px;
+    max-width: 70%;
+    background-color: white;
+    border-radius: 5px;
+    padding: 16px;
+    box-sizing: border-box;
+    transition: transform 0.3s ease-out;
+}
+
+.ProfileLinks {
+    display: flex;
+    flex-direction: column;
+}
+
+.Link {
+    margin: 4px 0;
+}
+
+.ProfileLinks a {
+    text-decoration: none;
+    color: var(--darkBlue);
+}
+
+.Link:hover a {
+    font-weight: 700;
+}
+
+
+@media (min-width: 576px) {
+    .ProfileDrawer {
+
+    }
+  }

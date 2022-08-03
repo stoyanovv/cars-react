@@ -1,0 +1,35 @@
+.MainDiv {
+    background-color: rgb(224, 226, 228);
+    margin-top: -20px;
+    height: 1160px;
+}
+
+h2 {
+   text-align: center;
+}
+
+.Img {
+    float: right;
+    margin: 0 10px;
+    height: 70%;
+    width: 70%;
+    border-radius: 30px;
+}
+
+p {
+    margin-left: 10px;
+    
+}
+
+@media (min-width: 576px) {
+  p {
+      margin: 30px 40px 40px 40px;
+      font-size: 17px;
+  }
+
+  .Img {
+    height: 50%;
+    width: 50%;
+    margin: 0 10px 30px 30px;
+}
+}

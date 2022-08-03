@@ -1,0 +1,65 @@
+@import '../../../../Shared/CssVars.css';
+
+.TriangleButton {
+    background-color: transparent;
+    border-color: transparent;
+	width: 0;
+	height: 0;
+	outline: none;
+	border-top: 3rem solid transparent;
+    border-bottom: 3rem solid transparent;
+	border-radius: 1rem;
+	cursor: pointer;
+}
+
+
+.TriangleLeft {
+	border-right: 1rem solid var(--blue);
+}
+
+
+.TriangleRight {
+	border-left: 1rem solid var(--blue);	
+}
+
+.TriangleLeft:hover {
+	border-right-color:  #477996 ;
+}
+
+.TriangleRight:hover {
+	border-left-color: #477996;
+}
+
+.TriangleLeft:disabled {
+	border-right: 1rem solid #ccc;
+	cursor: auto;
+}
+
+.TriangleRight:disabled {
+	border-left: 1rem solid #ccc;
+	cursor: auto;
+}
+
+@media (min-width: 576px) {
+	.TriangleLeft {
+		border-right: 1.5rem solid var(--blue);
+	}
+	
+	.TriangleRight {
+		border-left: 1.5rem solid var(--blue);	
+	}
+
+	.TriangleLeft:disabled {
+		border-right: 1.5rem solid #ccc;
+		cursor: auto;
+	}
+	
+	.TriangleRight:disabled {
+		border-left: 1.5rem solid #ccc;
+		cursor: auto;
+	}
+
+}
+
+
+

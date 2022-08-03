@@ -1,0 +1,28 @@
+@import '../../../Shared/CssVars.css';
+
+.SportsButtons {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    background-color: var(--lightBlue);
+    height: 50px;
+}
+
+.Button {
+    background-color: var(--lightBlue);
+    font-size: 15px;
+    color: #155374;
+    font-weight: bold;
+    padding: 5px 20px;
+    padding-bottom: 8px;
+    border: none;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+    outline: none;
+}
+
+.Button:hover {
+    color: #708b97;
+    transform: scale(1.03);
+    cursor: pointer;
+}

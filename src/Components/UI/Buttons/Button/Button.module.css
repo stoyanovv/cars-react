@@ -1,0 +1,61 @@
+@import '../../../../Shared/CssVars.css';
+
+.Button {
+   margin: 4px 3px;
+   font-size: 14px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 0ch;
+    letter-spacing: 0.7px;
+    outline: none;    
+    width: 100%;
+}
+
+.Button:hover {
+    cursor: pointer;
+    opacity: 0.85;
+}
+
+.Button:disabled{
+    background-color: rgb(156, 154, 154);
+    cursor: default;
+    opacity: 1;
+}
+
+.Challenge {
+    /* background-color: #A7BD0D; */
+    background-image: linear-gradient(to right top, #f89d7e, #f99a86, #f8978d, #f79595, #f4949d);
+    color: white;
+    font-weight: 600;
+}
+
+.Message {
+    background-color: #E0E0E0;
+    font-weight: 600;
+    border: 0.3px solid var(--blue);
+}
+
+.Challenge:hover {
+    background-color: #fbd998;
+}
+
+.Accept {
+    /* background-color: #5C9210; */
+    background-image: linear-gradient(to left bottom, #5c9210, #669d1b, #71a825, #7bb32e, #86be37);
+    color: white;
+
+}
+
+
+.Decline {
+    /* background-color: #EC5644; */
+    background-image: linear-gradient(to left bottom, #ec5644, #e8503e, #e34b38, #df4532, #da3f2c);
+
+    color: white;
+}
+
+.LogIn {
+    background-color: #1E5162;
+    color: white;
+}
+

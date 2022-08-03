@@ -1,0 +1,67 @@
+@import '../../../../Shared/CssVars.css';
+
+.NavItem {
+    margin: 10px 0;
+    display: block;
+    width: 100%;
+}
+
+.NavItem a {
+    color:  var(--darkBlue);
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+}
+
+.NavItem a:hover{   
+    color:  #0f3c55;
+}
+
+.NavItem a:active,
+.NavItem a.active {
+    font-weight: 800;
+    color:  #0f3c55;
+}
+
+.NavItemFooter a {
+    display: inline-flex;
+    color: white;
+    margin: 0 10px;
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.NavItemFooter a:hover {
+   color: orange;
+}
+
+@media (min-width: 576px) {
+    .NavItem {
+        margin:0;
+        display: flex;
+        height: 100%;
+        width: auto;
+        align-items: center;
+    }
+    
+    .NavItem a {
+         color:  var(--darkBlue);
+         height: 100%;
+         padding: 10px;
+         border-radius: 15px;
+         -webkit-transition: all 0.1s ease;
+         -moz-transition: all 0.1s ease;
+         -o-transition: all 0.1s ease;
+         transition: all 0.1s ease;
+      }
+    
+    .NavItem a:hover{
+        background-color: rgba(180, 207, 230, 0.657);
+    }
+
+
+}

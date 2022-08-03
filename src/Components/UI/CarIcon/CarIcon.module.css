@@ -1,0 +1,33 @@
+
+.Pic {
+    border: 2px solid #ccc;
+    width: 200px;
+    height: 200px;
+    border-radius: 20px;
+    margin: 20px 20px 2px 20px;
+}
+
+.Text a {
+    text-decoration: none;
+}
+
+.Pic:hover {
+    background-color: #ebe0e0;
+    box-sizing: border-box;
+}
+
+.Names {
+   text-align: center;
+   font-size: 14px;
+   color: #155374;
+   font-weight: bold;
+}
+
+@media (min-width: 576px) {
+
+    .Names {
+        font-size: 17px;
+ 
+     }
+
+}

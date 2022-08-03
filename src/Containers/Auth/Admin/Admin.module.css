@@ -1,0 +1,27 @@
+.Admin {
+    align-content: center;
+    text-align: center;
+    background-color: rgb(224, 226, 228);
+    padding: 20px;
+    height: 1160px;
+}
+
+.SuperAdmin {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.Panel {
+    margin: 10px 20px;
+    text-align: center;
+}
+
+.Form {
+    display: flex;
+    flex-direction: column;
+}
+
+.Block {
+   height: 256px;
+}

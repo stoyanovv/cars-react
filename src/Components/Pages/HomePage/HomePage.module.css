@@ -1,0 +1,90 @@
+.MainDiv {
+    background-color: rgb(224, 226, 228);
+    height: 1160px;
+}
+
+.Header {
+    text-align: center;
+    font-size: 20px;
+    margin: 15px;
+}
+
+.Container {
+     padding: 10px 10px;
+}
+
+.PicturesContainer {
+    width: 100%;
+    max-width: 720px;
+    border-radius: 20px;
+}
+
+.Banner {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column-reverse;
+    height: 350px;
+    width: 100%;
+}
+
+.BannerHeaders {
+    width: 300px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.BannerHeader {
+    margin: 8px 0;
+    transition: all 0.03s ease-in-out;
+    font-size: 16px;
+}
+
+.BannerHeader:hover {
+    font-weight: 700;
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.Image {
+    height: 50%;
+    border-radius: 20px;
+}
+
+.AdBanner {
+    width: 100%;
+    margin: 0;
+}
+
+.Ad {
+    margin: 0 10px;
+}
+
+
+@media (min-width: 576px) {
+    .Container {
+        display: flex;
+        flex-flow: row;
+        justify-content: space-around;
+    }
+
+    .SpecialOfferMessage {
+          margin: 15px auto;
+      
+    }
+
+    .Banner {
+        flex-direction: row;
+    }
+
+    .BannerHeader {
+        margin: 20px 0;
+        font-size: 20px;
+    }
+
+    .Image {
+        height: 80%;
+    
+    }
+
+}

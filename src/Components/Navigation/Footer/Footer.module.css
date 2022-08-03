@@ -1,0 +1,21 @@
+.Footer {
+    background-color: #122B39;
+    padding: 4px;
+    text-align: center;
+    color: white;
+    font-size: 12px;
+    font-weight: 300;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+
+@media (min-width: 576px) {
+    .Footer {
+        padding-bottom: 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}

@@ -1,0 +1,58 @@
+.MainDiv {
+    background-color: rgb(224, 226, 228);
+    margin-top: -30px;
+    height: 1160px;
+}
+
+.Signup {
+    width: 270px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.Header {
+    font-size: 32px;
+}
+
+.Form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.TwoContainers {
+    display: flex;
+    margin-top: 10px;
+    border: 2px solid #ccc;
+    width: 260px;
+    height: 30px;
+    padding: 3px 0;
+    padding-left: 10px;
+    border-radius: 8px;
+    align-items: center;
+    font-size: 10px;
+}
+
+.Inputs {
+    outline: none;
+    width: 210px;
+    border: none;
+    margin-left: 15px;
+    font-size: 15px;
+    color: #155374;
+}
+
+.SignupText {
+    margin-top: 10px;
+}
+
+.SignupText a {
+    text-decoration: none;
+}
+
+@media (min-width: 576px) {
+    .Signup {
+        width: 400px;
+    }
+}
+

@@ -1,0 +1,59 @@
+.TwoContainers {
+    display: flex;
+    margin: 10px auto;
+    border: 2px solid rgb(167, 162, 162);
+    width: 100%;
+    max-width: 300px;
+    height: 30px;
+    padding: 3px 0;
+    padding-left: 10px;
+    border-radius: 8px;
+    align-items: center;
+    font-size: 10px;
+}
+
+.TwoContainers:focus-within {
+  border-color: #aaa;
+}
+
+.Input {
+    outline: none;
+    border: none;
+    margin-left: 15px;
+    font-size: 15px;
+    color: #155374;
+    width: 100%;
+    background-color: rgb(224, 226, 228);
+}
+
+.ValidationError {
+   font-size: smaller;
+   margin:0;
+   color: red;
+} 
+
+.Label{
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.TwoContainers.Invalid{
+   border-color: rgb(255, 127, 127);
+}
+
+.Textarea {
+    height: 140px;
+    font-size: 15px;
+    color: #155374;
+}
+
+.TextareaContainer 
+{height:300px}
+
+@media (min-width: 576px) {
+    .TwoContainers {
+    max-width: 300px;
+
+    }
+}

@@ -1,0 +1,114 @@
+@import '../../../Shared/CssVars.css';
+
+.ContactsPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: rgb(224, 226, 228);
+    height: 1160px;
+}
+
+.Info {
+    margin-top: 15px;
+    padding: 5px 20px;
+    padding-top: 0px;
+    background-color:  var(--blue);
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.Form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Inputs {
+    outline: none;
+    width: 210px;
+    border: none;
+    margin-left: 15px;
+    font-size: 15px;
+    color: #0e4664;
+    background-color: rgb(224, 226, 228);
+
+}
+
+.TwoContainers {
+    display: flex;
+    margin-top: 20px;
+    border: 2px solid rgb(167, 162, 162);
+    width: 260px;
+    height: 30px;
+    padding: 3px 0;
+    padding-left: 10px;
+    border-radius: 8px;
+    align-items: center;
+    font-size: 12px;
+}
+
+.TextContainer {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 2px solid rgb(167, 162, 162);
+    width: 300px;
+    height: 150px;
+    padding-left: 10px;
+    padding-top: 10px;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+.Textarea {
+    width: 250px;
+    height: 140px;
+    font-size: 15px;
+    color: #155374;
+}
+
+.Button {
+        background-color: #FFA000;
+        color: rgb(255, 255, 255);
+        font-size: 15px;
+        width: 100px;
+        height: 30px;
+        border-radius: 12px;
+        font-weight: 600;
+        border: 0ch;
+        letter-spacing: 1px;
+        outline: none;
+    }
+
+    .Button:hover {
+        background-color:  #af8840;
+        cursor: pointer;
+    }
+
+    @media (min-width: 576px) {
+        .Info {
+            margin-top: 20px;
+            padding: 20px 40px;
+           
+        }
+
+        .TwoContainers {
+            width: 300px;
+        }
+
+        .Inputs {
+            width: 230px;
+        }
+
+        .TextContainer {
+            width: 500px;
+            height: 200px;
+        }
+
+        .Textarea {
+            width: 453px;
+            height: 194px;
+        }
+    
+    }

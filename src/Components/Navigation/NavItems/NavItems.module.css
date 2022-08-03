@@ -1,0 +1,39 @@
+@import '../../../Shared/CssVars.css';
+
+.NavItems {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    height: 100%;
+}
+
+.NavItemsFooter {
+    display: flex;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    list-style: none;
+    justify-content: center;
+    flex-flow: row;
+    margin: 5px;
+    padding: 0;
+}
+
+.NavItems a {
+    text-decoration: none;
+}
+
+@media (min-width: 576px) {
+    .NavItems {
+        margin-right: 10px;
+        flex-flow: row;
+    }
+
+    .NavItems :nth-child(1) {
+        order: 5;  
+    }
+
+}

@@ -1,0 +1,21 @@
+.CarsSlideShow {
+    display: flex;
+    align-items: center;
+    transition: all 0.35s ease-in-out;
+    justify-content: center;
+}
+
+ .CarsIcons{ 
+    grid-template-columns: auto auto;
+    grid-template-rows: 1fr 1fr;
+    grid-auto-flow: column;
+    display: grid;
+ }
+ 
+ 
+@media (min-width: 576px) {
+    .CarsSlideShow {
+        margin-top: -15px;
+    }
+
+}

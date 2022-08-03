@@ -1,0 +1,31 @@
+@import '../../../Shared/CssVars.css';
+.Message{
+   text-align: center;
+   font-size: 20px;
+}
+
+
+
+.Link {
+    margin: 10px auto;
+    background-color: var(--lightBlue);
+    border-radius: 6px;
+    font-weight: 500;
+    width: 350px;
+}
+
+.Link:hover {
+    border: 1px solid var(--blue);
+    cursor: pointer;
+    margin: 9px auto;
+
+}
+
+.Link a {
+    text-decoration: none;
+}
+
+.Anchor {
+   color: var(--darkBlue);
+
+}

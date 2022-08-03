@@ -1,0 +1,38 @@
+.Profile {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    padding: 5px 7px 5px 5px;
+    
+}
+
+
+.Profile:hover {
+    background-color: rgba(180, 207, 230, 0.657);
+    cursor: pointer;
+    border-radius: 15px;
+    -webkit-transition: all 0.1s ease;
+    -moz-transition: all 0.1s ease;
+    -o-transition: all 0.1s ease;
+    transition: all 0.1s ease;
+}
+
+.Image {
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    margin-right: 5px;
+    font-size: 22px;
+    background-color: white;
+    border-radius: 100px;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+}
+
+.UserName {
+    color: var(--darkBlue);
+    font-size: 15px;
+
+    font-weight: 600;
+}

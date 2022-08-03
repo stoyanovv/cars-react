@@ -1,0 +1,58 @@
+@import '../../../Shared/CssVars.css';
+
+.MainDiv {
+    background-color: rgb(224, 226, 228);
+    margin-top: -30px;
+    height: 1160px;
+}
+
+.LogIn {
+    width: 270px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+
+.Header {
+    font-size: 32px;
+}
+
+.Form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.RegisterText {
+    margin: 10px auto;
+    background-color: var(--lightBlue);
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.RegisterText:hover {
+    border: 1px solid var(--blue);
+    cursor: pointer;
+    margin: 9px auto;
+
+}
+
+.RegisterText a {
+    text-decoration: none;
+}
+
+@media (min-width: 576px) {
+    .LogIn {
+        width: 400px;
+    }
+
+    .RegisterText {
+        margin: 10px auto;
+        background-color: #81bfe3;
+        border-radius: 8px;
+        width: 80%;
+    }
+}
+
+

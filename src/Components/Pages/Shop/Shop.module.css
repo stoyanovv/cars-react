@@ -1,0 +1,53 @@
+.Shop {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(224, 226, 228);
+    padding: 20px;
+    min-height: 1160px;
+    flex-wrap: wrap;
+}
+
+.Cars {
+    display: grid;
+    grid-template-rows: 300px 300px 300px 300px;
+    grid-template-columns: 400px 400px 400px 400px;
+    margin: 30px;
+
+}
+
+.Container {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(224, 226, 228);
+}
+
+.Search {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    width: 550px;
+}
+
+.Select {
+    margin: 0 10px;
+    max-height: 25px;
+}
+
+.Button {
+    margin: 4px 3px;
+    font-size: 14px;
+     padding: 3px 5px;
+     border-radius: 8px;
+     border: 0ch;
+     letter-spacing: 0.7px;
+     outline: none;    
+     width: 100%;
+     background-image: linear-gradient(to left bottom, #5c9210, #669d1b, #71a825, #7bb32e, #86be37);
+     color: white;
+ }
+
+ .Button:hover {
+    cursor: pointer;
+ }
