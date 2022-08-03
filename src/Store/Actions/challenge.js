@@ -1,7 +1,7 @@
 import Data from '../../Data/Data'
 import * as actionTypes from './actionTypes'
 import { setSnackbar } from './snackbar'
-import Auth from '../../Containers/Auth/Auth'
+import Auth from '../../Components/Pages/Auth/Auth'
 
 
 export const authStart = () => {

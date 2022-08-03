@@ -1,6 +1,6 @@
 import { faCar } from '@fortawesome/free-solid-svg-icons'
 import React, { Component } from 'react'
-import Auth from '../../../Containers/Auth/Auth'
+import Auth from '../Auth/Auth'
 import Data from '../../../Data/Data'
 import Car from '../../UI/Car/Car'
 import Input from '../../UI/Input/Input'

@@ -1,8 +1,8 @@
 import { Route, Switch } from "react-router-dom";
 import AboutUsPage from "../../Components/Pages/AboutUsPage/AboutUsPage";
-import LogIn from "../../Containers/Auth/LogIn/LogIn";
-import Logout from "../../Containers/Auth/Logout/Logout";
-import Signup from "../../Containers/Auth/Signup/Signup";
+import LogIn from "../../Components/Pages/Auth/LogIn/LogIn";
+import Logout from "../../Components/Pages/Auth/Logout/Logout";
+import Signup from "../../Components/Pages/Auth/Signup/Signup";
 import ContactsPage from "../../Components/Pages/ContactsPage/ContactsPage";
 import HomePage from "../../Components/Pages/HomePage/HomePage";
 import MyProfilePage from "../../Components/Pages/MyProfilePage/MyProfilePage";
@@ -11,9 +11,8 @@ import Cart from "../../Components/Pages/CartPage/Cart";
 import Shop from "../../Components/Pages/Shop/Shop";
 import RulesPage from "../../Components/Pages/RulesPage/RulesPage";
 import CarInfo from "../../Components/UI/Car/CarInfo";
-import Admin from "../../Containers/Auth/Admin/Admin";
+import Admin from "../../Components/Pages/Auth/Admin/Admin";
 import AdminRoute from './AdminRoute';
-import ConfirmEmail from "../../Components/Pages/ConfirmEmailPage/ConfirmEmail";
 
 const Routes = (props) => {
    if (props.isAuth) {
@@ -43,7 +42,6 @@ const Routes = (props) => {
             <Route path="/rules" component={RulesPage} />
             <Route path="/about" render={(p) => <AboutUsPage {...p} />} />
             <Route path="/contacts" component={ContactsPage} />
-            <Route path="/confirm/:token" component={ConfirmEmail} />
             <Route path="/login" component={LogIn} />
             <Route path="/signup" component={Signup} />
             <Route path="/" exact component={HomePage} />

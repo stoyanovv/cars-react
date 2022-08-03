@@ -3,7 +3,7 @@ import styles from './ProfileDrawer.module.css'
 import Auxi from '../../../HOC/Auxi/Auxi'
 import BackDrop from '../../UI/BackDrop/BackDrop'
 import { Link } from 'react-router-dom'
-import Auth from '../../../Containers/Auth/Auth'
+import Auth from '../../Pages/Auth/Auth'
 
 const ProfileDrawer = (props) => {
    let attachedStyles = [styles.ProfileDrawer, styles.Close]

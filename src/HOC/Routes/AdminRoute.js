@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Redirect } from "react-router-dom";
-import Auth from '../../Containers/Auth/Auth';
+import Auth from '../../Components/Pages/Auth/Auth';
 
 const AdminRoute = ({ component: Component, ...rest }) => {
    const isAdmin = Auth.isAdmin()

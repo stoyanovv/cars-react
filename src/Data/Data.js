@@ -1,4 +1,4 @@
-import Auth from "../Containers/Auth/Auth"
+import Auth from "../Components/Pages/Auth/Auth"
 
 const baseURL = process.env.REACT_APP_SERVER_URL
 

@@ -1,4 +1,4 @@
-@import '../../../Shared/CssVars.css';
+@import '../../../../Shared/CssVars.css';
 
 .MainDiv {
     background-color: rgb(224, 226, 228);
@@ -54,5 +54,3 @@
         width: 80%;
     }
 }
-
-

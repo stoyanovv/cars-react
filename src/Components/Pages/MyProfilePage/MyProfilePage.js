@@ -1,7 +1,7 @@
-import React, { Component, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './MyProfilePage.module.css'
 import Data from '../../../Data/Data'
-import Auth from '../../../Containers/Auth/Auth'
+import Auth from '../Auth/Auth'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
@@ -17,27 +17,22 @@ const MyProfilePage = () => {
    }
    );
    useEffect(() => {
-      console.log("initially");
-      return () => {
-         console.log('hmm')
-      }
+      const url = 'myprofile/' + userInfo.id
+      Data.get(url, Auth.isUserAuthenticated)
+         .then(res => {
+            const user = res.myProfileView
+            setUserInfo({
+               id: window.localStorage.getItem('userId'),
+               index: 0,
+               name: user.name,
+               lastName: user.lastName,
+               age: user.age,
+               phoneNumber: user.phoneNumber,
+               email: user.email
+            }
+            )
+         })
    }, [])
-
-   const url = 'myprofile/' + userInfo.id
-   Data.get(url, Auth.isUserAuthenticated)
-      .then(res => {
-         const user = res.myProfileView
-         setUserInfo({
-            id: window.localStorage.getItem('userId'),
-            index: 0,
-            name: user.name,
-            lastName: user.lastName,
-            age: user.age,
-            phoneNumber: user.phoneNumber,
-            email: user.email
-         }
-         )
-      })
 
    return (
       <div className={styles.MyProfile}>

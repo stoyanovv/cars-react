@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Data from '../Data/Data'
-import Auth from '../Containers/Auth/Auth'
+import Auth from '../Components/Pages/Auth/Auth'
 import * as actions from '../Store/Actions/index'
 import { connect } from 'react-redux';
 

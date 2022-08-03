@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import Input from '../../../Components/UI/Input/Input';
+import Input from '../../../UI/Input/Input';
 import { faBirthdayCake, faCity, faEnvelope, faFont, faLock, faPhoneAlt, faVenusMars, } from '@fortawesome/free-solid-svg-icons'
-import { checkValidity } from '../../../Shared/HelperFunctions';
+import { checkValidity } from '../../../../Shared/HelperFunctions';
 import styles from './Signup.module.css'
-import Button from '../../../Components/UI/Buttons/Button/Button';
-import * as actions from '../../../Store/Actions/index'
+import Button from '../../../UI/Buttons/Button/Button';
+import * as actions from '../../../../Store/Actions'
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import Spinner from '../../../Components/UI/Spinner/Spinner';
+import Spinner from '../../../UI/Spinner/Spinner';
 
 class Signup extends Component {
    state = {

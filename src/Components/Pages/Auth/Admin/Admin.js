@@ -1,17 +1,16 @@
-import React, { Component, useState } from 'react';
-import { checkValidity } from '../../../Shared/HelperFunctions';
-import Data from '../../../Data/Data'
+import React, { useState } from 'react';
+import { checkValidity } from '../../../../Shared/HelperFunctions';
+import Data from '../../../../Data/Data'
 import styles from './Admin.module.css'
 import { faCar, faDollarSign } from '@fortawesome/free-solid-svg-icons';
-import Input from '../../../Components/UI/Input/Input';
-import Button from '../../../Components/UI/Buttons/Button/Button';
-import * as actions from '../../../Store/Actions/index'
+import Input from '../../../UI/Input/Input';
+import Button from '../../../UI/Buttons/Button/Button';
+import * as actions from '../../../../Store/Actions'
 import { connect } from 'react-redux';
 
 
-class Admin extends Component {
-    // const [inputs, setInputs] = useState();
-    state = {
+const Admin = (props) => {
+    const initialState = {
         inputs: {
             make: {
                 elementType: 'input',
@@ -119,15 +118,16 @@ class Admin extends Component {
             },
         },
         formIsValid: false
-    }
+    };
+    const [state, setState] = useState(initialState);
 
-    inputChangedHandler = (event, inputName) => {
+    const inputChangedHandler = (event, inputName) => {
         const updatedInputs = {
-            ...this.state.inputs,
+            ...state.inputs,
             [inputName]: {
-                ...this.state.inputs[inputName],
+                ...state.inputs[inputName],
                 value: event.target.value,
-                valid: checkValidity(event.target.value, this.state.inputs[inputName].validation),
+                valid: checkValidity(event.target.value, state.inputs[inputName].validation),
                 touched: true
             }
         }
@@ -136,86 +136,69 @@ class Admin extends Component {
 
             formIsValid = updatedInputs[inputIdentifier].valid && formIsValid && updatedInputs[inputIdentifier].touched;
         }
-        this.setState({
+        setState({
             inputs: updatedInputs,
             formIsValid: formIsValid
         })
     }
 
-    submitHandler = (event) => {
+    const submitHandler = (event) => {
         event.preventDefault()
-        const car = [
-            { make: this.state.inputs.make.value },
-            { model: this.state.inputs.model.value },
-            { fuel: this.state.inputs.fuel.value },
-            { enginePower: this.state.inputs.enginePower.value },
-            { year: this.state.inputs.year.value },
-            { price: this.state.inputs.price.value },
-            { imgUrl: this.state.inputs.imgUrl.value }
-        ]
 
         Data.post('admin/addcar',
             {
-                make: this.state.inputs.make.value,
-                model: this.state.inputs.model.value,
-                fuel: this.state.inputs.fuel.value,
-                enginePower: this.state.inputs.enginePower.value,
-                year: this.state.inputs.year.value,
-                price: this.state.inputs.price.value,
-                imgUrl: this.state.inputs.imgUrl.value
+                make: state.inputs.make.value,
+                model: state.inputs.model.value,
+                fuel: state.inputs.fuel.value,
+                enginePower: state.inputs.enginePower.value,
+                year: state.inputs.year.value,
+                price: state.inputs.price.value,
+                imgUrl: state.inputs.imgUrl.value
             })
             .then(res => {
                 if (res.success) {
-                    this.props.setSnackbar('success', res.message)
-
-                    this.state.inputs.make.value = '';
+                    props.setSnackbar('success', res.message)
+                    setState(initialState);
                 }
                 else if (!res.success) {
-                    this.props.setSnackbar('error', res.message)
+                    props.setSnackbar('error', res.message)
 
                 }
             })
     }
 
-    render() {
-        const formElementsArray = [];
-        for (let key in this.state.inputs) {
-            formElementsArray.push({
-                id: key,
-                config: this.state.inputs[key]
-            });
-        }
-
-        let form = formElementsArray.map(formElement => (
-            <Input
-                name={formElement.id}
-                key={formElement.id}
-                icon={formElement.config.icon}
-                elementType={formElement.config.elementType}
-                elementConfig={formElement.config.elementConfig}
-                value={formElement.config.value}
-                invalid={!formElement.config.valid}
-                shouldValidate={formElement.config.validation}
-                touched={formElement.config.touched}
-                changed={(event) => this.inputChangedHandler(event, formElement.id)} />)
-        )
-
-
-        // let errorMessage = null
-        // if (this.props.error) {
-        //     errorMessage = (<p style={{ color: 'tomato' }}>{this.props.error}</p>)
-        // }
-        return (
-            <div className={styles.Admin}>
-                <h2>Добавете автомобил в онлайн магазина</h2>
-                <form onSubmit={this.submitHandler}>
-                    {form}
-                    <Button
-                        buttonType='LogIn' submit width='180px' disabled={!this.state.formIsValid}>Добави авотомобил</Button>
-                </form>
-            </div>
-        );
+    const formElementsArray = [];
+    for (let key in state.inputs) {
+        formElementsArray.push({
+            id: key,
+            config: state.inputs[key]
+        });
     }
+
+    let form = formElementsArray.map(formElement => (
+        <Input
+            name={formElement.id}
+            key={formElement.id}
+            icon={formElement.config.icon}
+            elementType={formElement.config.elementType}
+            elementConfig={formElement.config.elementConfig}
+            value={formElement.config.value}
+            invalid={!formElement.config.valid}
+            shouldValidate={formElement.config.validation}
+            touched={formElement.config.touched}
+            changed={(event) => inputChangedHandler(event, formElement.id)} />)
+    )
+
+    return (
+        <div className={styles.Admin}>
+            <h2>Добавете автомобил в онлайн магазина</h2>
+            <form onSubmit={submitHandler}>
+                {form}
+                <Button
+                    buttonType='LogIn' submit width='180px' disabled={!state.formIsValid}>Добави авотомобил</Button>
+            </form>
+        </div>
+    );
 }
 
 const mapDispatchToProps = dispatch => {
