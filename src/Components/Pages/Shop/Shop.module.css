@@ -10,11 +10,9 @@
 }
 
 .Cars {
-    display: grid;
-    grid-template-rows: 300px 300px 300px 300px;
-    grid-template-columns: 400px 400px 400px 400px;
-    margin: 30px;
-
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .Container {
@@ -38,16 +36,16 @@
 .Button {
     margin: 4px 3px;
     font-size: 14px;
-     padding: 3px 5px;
-     border-radius: 8px;
-     border: 0ch;
-     letter-spacing: 0.7px;
-     outline: none;    
-     width: 100%;
-     background-image: linear-gradient(to left bottom, #5c9210, #669d1b, #71a825, #7bb32e, #86be37);
-     color: white;
- }
+    padding: 3px 5px;
+    border-radius: 8px;
+    border: 0ch;
+    letter-spacing: 0.7px;
+    outline: none;
+    width: 100%;
+    background-image: linear-gradient(to left bottom, #5c9210, #669d1b, #71a825, #7bb32e, #86be37);
+    color: white;
+}
 
- .Button:hover {
+.Button:hover {
     cursor: pointer;
- }
+}

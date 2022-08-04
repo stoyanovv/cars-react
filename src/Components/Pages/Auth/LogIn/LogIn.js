@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Input from '../../../UI/Input/Input';
 import { faEnvelope, faLock, } from '@fortawesome/free-solid-svg-icons'
 import { checkValidity } from '../../../../Shared/HelperFunctions';
@@ -9,8 +9,8 @@ import * as actions from '../../../../Store/Actions'
 import { connect } from 'react-redux';
 import Spinner from '../../../UI/Spinner/Spinner'
 
-class LogIn extends Component {
-   state = {
+const LogIn = (props) => {
+   const [state, setState] = useState({
       inputs: {
          email: {
             elementType: 'input',
@@ -44,15 +44,15 @@ class LogIn extends Component {
          }
       },
       formIsValid: false
-   }
+   });
 
-   inputChangedHandler = (event, inputName) => {
+   const inputChangedHandler = (event, inputName) => {
       const updatedInputs = {
-         ...this.state.inputs,
+         ...state.inputs,
          [inputName]: {
-            ...this.state.inputs[inputName],
+            ...state.inputs[inputName],
             value: event.target.value,
-            valid: checkValidity(event.target.value, this.state.inputs[inputName].validation),
+            valid: checkValidity(event.target.value, state.inputs[inputName].validation),
             touched: true
          }
       }
@@ -61,85 +61,83 @@ class LogIn extends Component {
 
          formIsValid = updatedInputs[inputIdentifier].valid && formIsValid && updatedInputs[inputIdentifier].touched;
       }
-      this.setState({
+      setState({
          inputs: updatedInputs,
          formIsValid: formIsValid
       })
    }
 
-   submitHandler = (event) => {
+   const submitHandler = (event) => {
       event.preventDefault()
       let data = {
-         email: this.state.inputs.email.value,
-         password: this.state.inputs.password.value
+         email: state.inputs.email.value,
+         password: state.inputs.password.value
       }
-      this.props.onAuth(data)
+      props.onAuth(data)
    }
 
-   render() {
-      const formElementsArray = [];
-      for (let key in this.state.inputs) {
-         formElementsArray.push({
-            id: key,
-            config: this.state.inputs[key]
-         });
-      }
+   const formElementsArray = [];
+   for (let key in state.inputs) {
+      formElementsArray.push({
+         id: key,
+         config: state.inputs[key]
+      });
+   }
 
-      let form = formElementsArray.map(formElement => (
-         <Input
-            name={formElement.id}
-            key={formElement.id}
-            icon={formElement.config.icon}
-            elementType={formElement.config.elementType}
-            elementConfig={formElement.config.elementConfig}
-            value={formElement.config.value}
-            invalid={!formElement.config.valid}
-            shouldValidate={formElement.config.validation}
-            touched={formElement.config.touched}
-            changed={(event) => this.inputChangedHandler(event, formElement.id)} />
-      ))
+   let form = formElementsArray.map(formElement => (
+      <Input
+         name={formElement.id}
+         key={formElement.id}
+         icon={formElement.config.icon}
+         elementType={formElement.config.elementType}
+         elementConfig={formElement.config.elementConfig}
+         value={formElement.config.value}
+         invalid={!formElement.config.valid}
+         shouldValidate={formElement.config.validation}
+         touched={formElement.config.touched}
+         changed={(event) => inputChangedHandler(event, formElement.id)} />
+   ))
 
-      if (this.props.loading) {
-         form = <Spinner />
-      }
+   if (props.loading) {
+      form = <Spinner />
+   }
 
-      let errorMessage = null
-      if (this.props.error) {
-         errorMessage = (<p style={{ color: 'tomato' }}>{this.props.error}</p>)
-      }
-      let message = null
-      if (this.props.message) {
-         message = (<p style={{ color: '#73C56D' }}>{this.props.message}</p>)
-      }
+   let errorMessage = null
+   if (props.error) {
+      errorMessage = (<p style={{ color: 'tomato' }}>{props.error}</p>)
+   }
+   let message = null
+   if (props.message) {
+      message = (<p style={{ color: '#73C56D' }}>{props.message}</p>)
+   }
 
-      if (this.props.isAuthenticated) {
-         return (<Redirect to='/' />)
-      }
+   if (props.isAuthenticated) {
+      return (<Redirect to='/' />)
+   }
 
-      return (
-         <div className={styles.MainDiv}>
-            <div className={styles.LogIn}>
-               <h2 className={styles.Header}>Влез и намери своята кола</h2>
-               {errorMessage}
-               {message}
-               <form onSubmit={this.submitHandler}>
-                  {form}
-                  <div style={{ marginTop: '20px', maxWidth: 100, margin: '0 auto' }}>
-                     <Button
-                        buttonType='LogIn'
-                        submit
-                        disabled={this.props.loading}>Вход</Button>
-                  </div>
-                  {this.props.isSignedUp ? null : <div className={styles.RegisterText}>
-                     <Link style={{ color: '#155374' }} to='/signup'>
-                        Все още нямаш акаунт? Създай го сега!
+   return (
+      <div className={styles.MainDiv}>
+         <div className={styles.LogIn}>
+            <h2 className={styles.Header}>Влез и намери своята кола</h2>
+            {errorMessage}
+            {message}
+            <form onSubmit={submitHandler}>
+               {form}
+               <div style={{ marginTop: '20px', maxWidth: 100, margin: '0 auto' }}>
+                  <Button
+                     buttonType='LogIn'
+                     submit
+                     disabled={props.loading}>Вход</Button>
+               </div>
+               {props.isSignedUp ? null : <div className={styles.RegisterText}>
+                  <Link style={{ color: '#155374' }} to='/signup'>
+                     Все още нямаш акаунт? Създай го сега!
                   </Link>
-                  </div>}
-               </form>
-            </div>
+               </div>}
+            </form>
          </div>
-      );
-   }
+      </div>
+   );
 }
 
 const mapStateToProps = state => {

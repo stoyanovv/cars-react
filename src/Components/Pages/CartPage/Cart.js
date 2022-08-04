@@ -3,7 +3,7 @@ import Data from '../../../Data/Data'
 import Car from '../../UI/Car/Car'
 import styles from './Cart.module.css'
 
-const Cart = (props) => {
+const Cart = () => {
 
     const [cart, setCart] = useState({
         id: window.localStorage.getItem('userId'),

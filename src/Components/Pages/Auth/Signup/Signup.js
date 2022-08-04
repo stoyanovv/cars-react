@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Input from '../../../UI/Input/Input';
 import { faBirthdayCake, faCity, faEnvelope, faFont, faLock, faPhoneAlt, faVenusMars, } from '@fortawesome/free-solid-svg-icons'
 import { checkValidity } from '../../../../Shared/HelperFunctions';
@@ -9,8 +9,8 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Spinner from '../../../UI/Spinner/Spinner';
 
-class Signup extends Component {
-   state = {
+const Signup = (props) => {
+   const [state, setState] = useState({
       inputs: {
          name: {
             elementType: 'input',
@@ -154,15 +154,15 @@ class Signup extends Component {
          }
       },
       formIsValid: false
-   }
+   })
 
-   inputChangedHandler = (event, inputName) => {
+   const inputChangedHandler = (event, inputName) => {
       const updatedInputs = {
-         ...this.state.inputs,
+         ...state.inputs,
          [inputName]: {
-            ...this.state.inputs[inputName],
+            ...state.inputs[inputName],
             value: event.target.value,
-            valid: checkValidity(event.target.value, this.state.inputs[inputName].validation),
+            valid: checkValidity(event.target.value, state.inputs[inputName].validation),
             touched: true
          }
       }
@@ -171,80 +171,78 @@ class Signup extends Component {
 
          formIsValid = updatedInputs[inputIdentifier].valid && formIsValid && updatedInputs[inputIdentifier].touched;
       }
-      this.setState({
+      setState({
          inputs: updatedInputs,
          formIsValid: formIsValid
       })
    }
 
 
-   submitHandler = (event) => {
+   const submitHandler = (event) => {
       event.preventDefault()
       let data = {}
-      for (let input in this.state.inputs) {
-         data[input] = this.state.inputs[input].value
+      for (let input in state.inputs) {
+         data[input] = state.inputs[input].value
       }
-      this.props.onAuth(data)
+      props.onAuth(data)
    }
 
-   render() {
-      const formElementsArray = [];
-      for (let key in this.state.inputs) {
-         formElementsArray.push({
-            id: key,
-            config: this.state.inputs[key]
-         });
-      }
+   const formElementsArray = [];
+   for (let key in state.inputs) {
+      formElementsArray.push({
+         id: key,
+         config: state.inputs[key]
+      });
+   }
 
-      let form = formElementsArray.map(formElement => (
-         <Input
-            name={formElement.id}
-            key={formElement.id}
-            icon={formElement.config.icon}
-            elementType={formElement.config.elementType}
-            elementConfig={formElement.config.elementConfig}
-            value={formElement.config.value}
-            invalid={!formElement.config.valid}
-            shouldValidate={formElement.config.validation}
-            touched={formElement.config.touched}
-            changed={(event) => this.inputChangedHandler(event, formElement.id)} />)
-      )
+   let form = formElementsArray.map(formElement => (
+      <Input
+         name={formElement.id}
+         key={formElement.id}
+         icon={formElement.config.icon}
+         elementType={formElement.config.elementType}
+         elementConfig={formElement.config.elementConfig}
+         value={formElement.config.value}
+         invalid={!formElement.config.valid}
+         shouldValidate={formElement.config.validation}
+         touched={formElement.config.touched}
+         changed={(event) => inputChangedHandler(event, formElement.id)} />)
+   )
 
 
-      if (this.props.loading) {
-         form = <Spinner />
-      }
+   if (props.loading) {
+      form = <Spinner />
+   }
 
-      let errorMessage = null
-      if (this.props.error) {
-         errorMessage = (<p style={{ color: 'tomato' }}>{this.props.error}</p>)
-      }
+   let errorMessage = null
+   if (props.error) {
+      errorMessage = (<p style={{ color: 'tomato' }}>{props.error}</p>)
+   }
 
-      if (this.props.isSignedUp) {
-         return (<Redirect to='/login' />)
-      }
+   if (props.isSignedUp) {
+      return (<Redirect to='/login' />)
+   }
 
-      return (
-         <div className={styles.MainDiv}>
+   return (
+      <div className={styles.MainDiv}>
 
-            <div className={styles.Signup}>
-               <h2 className={styles.Header}>Направи своята регистрация</h2>
-               {errorMessage}
-               <form onSubmit={this.submitHandler}>
-                  {form}
-                  <div style={{ marginTop: '20px', maxWidth: 160, margin: '0 auto' }}>
-                     <Button
-                        disabled={this.props.loading || !this.state.formIsValid}
-                        buttonType='LogIn' submit  >Регистрирай се</Button>
-                  </div>
-                  <div className={styles.SignupText}>
+         <div className={styles.Signup}>
+            <h2 className={styles.Header}>Направи своята регистрация</h2>
+            {errorMessage}
+            <form onSubmit={submitHandler}>
+               {form}
+               <div style={{ marginTop: '20px', maxWidth: 160, margin: '0 auto' }}>
+                  <Button
+                     disabled={props.loading || !state.formIsValid}
+                     buttonType='LogIn' submit  >Регистрирай се</Button>
+               </div>
+               <div className={styles.SignupText}>
 
-                  </div>
-               </form>
-            </div>
+               </div>
+            </form>
          </div>
-      );
-   }
+      </div>
+   );
 }
 
 

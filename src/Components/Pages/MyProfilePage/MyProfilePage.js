@@ -43,10 +43,10 @@ const MyProfilePage = () => {
                   <FontAwesomeIcon style={{ alignSelf: 'center' }} icon={faUser} size='10x' />
                </div>
                <div className={styles.ProfileInfoContainer}>
-                  <div className={styles.ProfileInfo}>Име {userInfo.name} {userInfo.lastName}</div>
-                  <div className={styles.ProfileInfo}>Имейл адрес {userInfo.email}</div>
-                  <div className={styles.ProfileInfo}>Телефон {userInfo.phoneNumber}</div>
-                  <div className={styles.ProfileInfo}>Възраст {userInfo.age} години</div>
+                  <div className={styles.ProfileInfo}>Име: {userInfo.name} {userInfo.lastName}</div>
+                  <div className={styles.ProfileInfo}>Имейл адрес: {userInfo.email}</div>
+                  <div className={styles.ProfileInfo}>Телефон: {userInfo.phoneNumber}</div>
+                  <div className={styles.ProfileInfo}>Възраст: {userInfo.age} години</div>
                </div>
             </div>
             <div className={styles.PlayedMatches}>

@@ -1,5 +1,5 @@
 import { faCar } from '@fortawesome/free-solid-svg-icons'
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 import Auth from '../Auth/Auth'
 import Data from '../../../Data/Data'
 import Car from '../../UI/Car/Car'
@@ -7,10 +7,9 @@ import Input from '../../UI/Input/Input'
 import styles from './Shop.module.css'
 import { checkValidity } from '../../../Shared/HelperFunctions';
 
-export default class Shop extends Component {
-    state = {
+const Shop = () => {
+    const [state, setState] = useState({
         id: window.localStorage.getItem('userId'),
-        cars: [],
         inputs: {
             make: {
                 elementType: 'select',
@@ -37,17 +36,21 @@ export default class Shop extends Component {
                 valid: true
             }
         }
+    });
+    const [cars, setCars] = useState([]);
+    const clickHandler = () => {
+
     }
 
-    componentDidMount() {
+    useEffect(() => {
         Data.get('shop', Auth.isUserAuthenticated)
             .then(res => {
                 const shop = res
-                const cars = []
+                const carss = []
                 shop.forEach(c => {
-                    cars.push(
+                    carss.push(
                         <Car
-                            {...this.state.props}
+                            {...state.props}
                             key={c.id}
                             id={c.id}
                             make={c.make}
@@ -55,26 +58,24 @@ export default class Shop extends Component {
                             price={c.price}
                             imgUrl={c.imgUrl}
                             bought={c.bought}
-                            clicked={this.clickHandler} />
+                            clicked={clickHandler} />
                     )
                 })
-                this.setState({
-                    cars: cars
-                })
+                setCars(carss)
             })
-    }
+    });
 
-    searchHandler = (event) => {
+    const searchHandler = (event) => {
         event.preventDefault()
-        const make = this.state.inputs.make.value
+        const make = state.inputs.make.value
         Data.post('search', { make: make }, Auth.isUserAuthenticated)
             .then(res => {
-                const cars = []
+                const carss = []
                 const shop = res
                 shop.forEach(c => {
-                    cars.push(
+                    carss.push(
                         <Car
-                            {...this.state.props}
+                            {...state.props}
                             key={c.id}
                             id={c.id}
                             make={c.make}
@@ -82,22 +83,20 @@ export default class Shop extends Component {
                             price={c.price}
                             imgUrl={c.imgUrl}
                             bought={c.bought}
-                            clicked={this.clickHandler} />
+                            clicked={clickHandler} />
                     )
                 })
-                this.setState({
-                    cars: cars
-                })
+                setCars(carss)
             })
     }
 
-    inputChangedHandler = (event) => {
+    const inputChangedHandler = (event) => {
         const updatedInputs = {
-            ...this.state.inputs,
+            ...state.inputs,
             make: {
-                ...this.state.inputs.make,
+                ...state.inputs.make,
                 value: event.target.value,
-                valid: checkValidity(event.target.value, this.state.inputs.make.validation),
+                valid: checkValidity(event.target.value, state.inputs.make.validation),
                 touched: true
             }
         }
@@ -106,42 +105,42 @@ export default class Shop extends Component {
 
             formIsValid = updatedInputs[inputIdentifier].valid && formIsValid && updatedInputs[inputIdentifier].touched;
         }
-        this.setState({
+        setState({
             inputs: updatedInputs,
             formIsValid: formIsValid
         })
     }
 
 
-    render() {
-        return (
-            <div className={styles.Shop}>
-                <div className={styles.Search}>
-                    Търси по марка:
-                        <Input
-                        name={this.state.inputs.id}
-                        key={this.state.inputs.id}
-                        icon={this.state.inputs.make.icon}
-                        elementType={this.state.inputs.make.elementType}
-                        elementConfig={this.state.inputs.make.elementConfig}
-                        value={this.state.inputs.make.value}
-                        invalid={!this.state.inputs.make.valid}
-                        shouldValidate={this.state.inputs.make.validation}
-                        touched={this.state.inputs.make.touched}
-                        changed={(event) => this.inputChangedHandler(event)} />
-                    <div style={{ maxWidth: 80, margin: '0 auto' }}>
-                        <button className={styles.Button} onClick={this.searchHandler} >Търси</button>
+    return (
+        <div className={styles.Shop}>
+            <div className={styles.Search}>
+                Търси по марка:
+                <Input
+                    name={state.inputs.id}
+                    key={state.inputs.id}
+                    icon={state.inputs.make.icon}
+                    elementType={state.inputs.make.elementType}
+                    elementConfig={state.inputs.make.elementConfig}
+                    value={state.inputs.make.value}
+                    invalid={!state.inputs.make.valid}
+                    shouldValidate={state.inputs.make.validation}
+                    touched={state.inputs.make.touched}
+                    changed={(event) => inputChangedHandler(event)} />
+                <div style={{ maxWidth: 80, margin: '0 auto' }}>
+                    <button className={styles.Button} onClick={searchHandler} >Търси</button>
+                </div>
+            </div>
+
+            {cars.length > 0 ?
+                <div className={styles.Container}>
+                    <div className={styles.Cars}>
+                        {cars.map(car => (car))}
                     </div>
                 </div>
-
-                {this.state.cars.length > 0 ?
-                    <div className={styles.Container}>
-                        <div className={styles.Cars}>
-                            {this.state.cars.map(car => (car))}
-                        </div>
-                    </div>
-                    : <h2>Няма намерени автомобили от тази марка</h2>}
-            </div>
-        );
-    }
+                : <h2>Няма намерени автомобили от тази марка</h2>}
+        </div>
+    );
 }
+
+export default Shop
