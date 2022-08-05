@@ -44,9 +44,6 @@ class Auth {
       }
       return false
    }
-
-
-
 }
 
 export default Auth

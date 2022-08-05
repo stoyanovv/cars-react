@@ -8,9 +8,10 @@
 .Img {
     border-radius: 10px;
     border: 2px solid rgb(109, 117, 139);
+    max-width: 800px;
 }
 
-.Description {  
+.Description {
     display: flex;
     flex-direction: row;
     align-items: center;

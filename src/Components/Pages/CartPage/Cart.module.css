@@ -5,10 +5,9 @@
 }
 
 .Shop {
-    display: grid;
-    grid-template-rows: 300px 300px 300px 300px;
-    grid-template-columns: 400px 400px 400px 400px;
-    margin: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .Container {

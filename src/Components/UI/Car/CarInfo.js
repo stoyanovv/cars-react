@@ -1,80 +1,70 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import Data from '../../../Data/Data'
 import Button from '../Buttons/Button/Button'
 import styles from './CarInfo.module.css'
 import * as actions from '../../../Store/Actions/index'
 
-class CarInfo extends Component {
-    state = {
+const CarInfo = (props) => {
+    const [state, setState] = useState({
         id: window.localStorage.getItem('userId'),
-        carInfo: [],
-        carId: this.props.match.params.id
-    }
+        carId: props.match.params.id
+    });
+    const [carInfo, setCarInfo] = useState([]);
 
-    componentDidMount() {
-        Data.get('carinfo/' + this.state.carId)
+    useEffect(() => {
+        Data.get('carinfo/' + state.carId)
             .then(res => {
-                const carInfo = res
-                this.setState({
-                    carInfo: carInfo
-                })
+                console.log(res);
+                setCarInfo(res);
+            })
+    }, []);
+
+    const buyHandler = () => {
+        Data.post('buycar/' + state.id, { carId: state.carId })
+            .then(res => {
+                props.setSnackbar('success', res.message)
+                setCarInfo(res);
+                props.history.push('/shop')
             })
     }
 
-    buyHandler = () => {
-        Data.post('buycar/' + this.state.id, { carId: this.state.carId })
+    const deleteHandler = () => {
+        Data.post('deletecar/' + state.id, { carId: state.carId })
             .then(res => {
-                this.props.setSnackbar('success', res.message)
-                const carInfo = res
-                this.setState({
-                    carInfo: carInfo
-                })
-                this.props.history.push('/shop')
+                props.setSnackbar('info', res.message)
+                setCarInfo(res);
+                props.history.push('/cart')
             })
     }
 
-    deleteHandler = () => {
-        Data.post('deletecar/' + this.state.id, { carId: this.state.carId })
-            .then(res => {
-                this.props.setSnackbar('info', res.message)
-                const carInfo = res
-                this.setState({
-                    carInfo: carInfo
-                })
-                this.props.history.push('/cart')
-            })
+    let button = null
+    if (!carInfo.bought) {
+        button = <Button buttonType="Accept" clicked={buyHandler} >Купи сега</Button>
     }
-
-    render() {
-        let button = null
-        if (!this.state.carInfo.bought) {
-            button = <Button buttonType="Accept" clicked={this.buyHandler} >Купи сега</Button>
-        }
-        else {
-            button = <Button buttonType="Decline" clicked={this.deleteHandler} >Премахни от покупки</Button>
-        }
-        return (
-            <div className={styles.CarInfo}>
-                <div className={styles.ImgContainer}>
-                    <img className={styles.Img} alt='no pic' src={this.state.carInfo.imgUrl}></img>
-                </div>
-                <div className={styles.Description}>
-                    <span className={styles.Info}>Марка: {this.state.carInfo.make}</span>
-                    <span className={styles.Info}>Модел: {this.state.carInfo.model}</span>
-                    <span className={styles.Info}>Цена: {this.state.carInfo.price} лв</span>
-                    <span className={styles.Info}>Година: {this.state.carInfo.year}</span>
-                </div>
-                <div className={styles.Description}>
-                    <span className={styles.Info}>Гориво: {this.state.carInfo.fuel}</span>
-                    <span className={styles.Info}>Мотор: {this.state.carInfo.enginePower} кубика</span>
-                </div>
-                <span>
-                    {button}
-                </span>
+    else {
+        button = <Button buttonType="Decline" clicked={deleteHandler} >Премахни от покупки</Button>
+    }
+    return (
+        <div className={styles.CarInfo}>
+            <div className={styles.ImgContainer}>
+                <img className={styles.Img} alt='no pic' src={carInfo.imgUrl}></img>
             </div>
-        );
-    }
+            <div className={styles.Description}>
+                <span className={styles.Info}>Марка: {carInfo.make}</span>
+                <span className={styles.Info}>Модел: {carInfo.model}</span>
+                <span className={styles.Info}>Цена: {carInfo.price} лв</span>
+                <span className={styles.Info}>Година: {carInfo.year}</span>
+            </div>
+            <div className={styles.Description}>
+                <span className={styles.Info}>Гориво: {carInfo.fuel}</span>
+                <span className={styles.Info}>Мотор: {carInfo.enginePower} кубика</span>
+            </div>
+            <span>
+                {button}
+            </span>
+        </div>
+    );
 }
 
 const mapDispatchToProps = dispatch => {

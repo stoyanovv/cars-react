@@ -5,7 +5,6 @@ import Data from '../../../Data/Data'
 import Car from '../../UI/Car/Car'
 import Input from '../../UI/Input/Input'
 import styles from './Shop.module.css'
-import { checkValidity } from '../../../Shared/HelperFunctions';
 
 const Shop = () => {
     const [state, setState] = useState({
@@ -38,66 +37,47 @@ const Shop = () => {
         }
     });
     const [cars, setCars] = useState([]);
-    const clickHandler = () => {
-
-    }
 
     useEffect(() => {
         Data.get('shop', Auth.isUserAuthenticated)
             .then(res => {
-                const shop = res
-                const carss = []
-                shop.forEach(c => {
-                    carss.push(
-                        <Car
-                            {...state.props}
-                            key={c.id}
-                            id={c.id}
-                            make={c.make}
-                            model={c.model}
-                            price={c.price}
-                            imgUrl={c.imgUrl}
-                            bought={c.bought}
-                            clicked={clickHandler} />
-                    )
-                })
-                setCars(carss)
+                loadCars(res);
             })
-    });
+    }, []);
 
     const searchHandler = (event) => {
         event.preventDefault()
         const make = state.inputs.make.value
         Data.post('search', { make: make }, Auth.isUserAuthenticated)
             .then(res => {
-                const carss = []
-                const shop = res
-                shop.forEach(c => {
-                    carss.push(
-                        <Car
-                            {...state.props}
-                            key={c.id}
-                            id={c.id}
-                            make={c.make}
-                            model={c.model}
-                            price={c.price}
-                            imgUrl={c.imgUrl}
-                            bought={c.bought}
-                            clicked={clickHandler} />
-                    )
-                })
-                setCars(carss)
+                loadCars(res);
             })
-    }
+    };
+
+    const loadCars = (res) => {
+        const carsToShow = []
+        res.forEach(c => {
+            carsToShow.push(
+                <Car
+                    {...state.props}
+                    key={c.id}
+                    id={c.id}
+                    make={c.make}
+                    model={c.model}
+                    price={c.price}
+                    imgUrl={c.imgUrl}
+                    bought={c.bought} />
+            )
+        })
+        setCars(carsToShow);
+    };
 
     const inputChangedHandler = (event) => {
         const updatedInputs = {
             ...state.inputs,
             make: {
                 ...state.inputs.make,
-                value: event.target.value,
-                valid: checkValidity(event.target.value, state.inputs.make.validation),
-                touched: true
+                value: event.target.value
             }
         }
         let formIsValid = true;
@@ -108,9 +88,8 @@ const Shop = () => {
         setState({
             inputs: updatedInputs,
             formIsValid: formIsValid
-        })
+        });
     }
-
 
     return (
         <div className={styles.Shop}>

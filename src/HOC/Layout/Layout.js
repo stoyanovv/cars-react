@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import { connect } from 'react-redux'
 import Footer from '../../Components/Navigation/Footer/Footer'
 import ProfileDrawer from '../../Components/Navigation/ProfileDrawer/ProfileDrawer'
@@ -6,64 +6,52 @@ import SideDrawer from '../../Components/Navigation/SideDrawer/SideDrawer'
 import Toolbar from '../../Components/Navigation/Toolbar/Toolbar'
 import Auxi from '../Auxi/Auxi'
 
-class Layout extends Component {
-   constructor(props) {
-      super(props)
+const Layout = (props) => {
+   const [showSideDrawer, setShowSideDrawer] = useState(false);
+   const [showProfileDrawer, setShowProfileDrawer] = useState(false);
 
-      this.state = {
-         showSideDrawer: false,
-         showProfileDrawer: false
-      }
+   const sideDrawerClosedHandler = () => {
+      setShowSideDrawer(false);
    }
-   sideDrawerClosedHandler = () => {
-      this.setState({
-         showSideDrawer: false
-      })
-   }
-   sideDrawerToggleHandler = () => {
-      this.setState((prevState) => {
-         return {
-            showSideDrawer: !prevState.showSideDrawer
-         }
-      })
-   }
-   profileDrawerClosedHandler = () => {
-      this.setState({
-         showProfileDrawer: false
-      })
-   }
-   profileDrawerToggleHandler = () => {
-      this.setState((prevState) => {
-         return {
-            showProfileDrawer: !prevState.showProfileDrawer
-         }
+
+   const sideDrawerToggleHandler = () => {
+      const setshowSideDrawer = ((prevState) => {
+         return !prevState.showSideDrawer
       })
    }
 
-   render() {
-      let screenHeight = window.screen.height
-      return (
-         <Auxi >
-            <Toolbar
-               open={this.state.showSideDrawer}
-               isAuth={this.props.isAuthenticated}
-               drawerToggleClicked={this.sideDrawerToggleHandler}
-               profileToggleClicked={this.profileDrawerToggleHandler} />
-            <SideDrawer
-               isAuth={this.props.isAuthenticated}
-               open={this.state.showSideDrawer}
-               closed={this.sideDrawerClosedHandler} />
-            <ProfileDrawer
-               isAuth={this.props.isAuthenticated}
-               open={this.state.showProfileDrawer}
-               closed={this.profileDrawerClosedHandler} />
-            <div style={{ minHeight: screenHeight }}>
-               {this.props.children}
-            </div>
-            <Footer />
-         </Auxi>
-      )
+   const profileDrawerClosedHandler = () => {
+      setShowProfileDrawer(false)
    }
+
+   const profileDrawerToggleHandler = () => {
+      setShowProfileDrawer((prevState) => {
+         return !prevState.showProfileDrawer
+      })
+   }
+
+   let screenHeight = window.screen.height
+   return (
+      <Auxi >
+         <Toolbar
+            open={showSideDrawer}
+            isAuth={props.isAuthenticated}
+            drawerToggleClicked={sideDrawerToggleHandler}
+            profileToggleClicked={profileDrawerToggleHandler} />
+         <SideDrawer
+            isAuth={props.isAuthenticated}
+            open={showSideDrawer}
+            closed={sideDrawerClosedHandler} />
+         <ProfileDrawer
+            isAuth={props.isAuthenticated}
+            open={showProfileDrawer}
+            closed={profileDrawerClosedHandler} />
+         <div style={{ minHeight: screenHeight }}>
+            {props.children}
+         </div>
+         <Footer />
+      </Auxi>
+   )
 }
 
 const mapStateToProps = state => {

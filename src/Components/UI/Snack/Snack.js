@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../../Store/Actions/index'
 import { withStyles } from "@material-ui/core/styles";
@@ -21,30 +21,28 @@ const classes = theme => ({
    },
 });
 
-class Snack extends Component {
-   handleClose = (event, reason) => {
+const Snack = (props) => {
+   const handleClose = (event, reason) => {
       if (reason === 'clickaway') {
          return;
       }
-      this.props.setSnackbar(this.props.snackType, this.props.message, false)
+      props.setSnackbar(props.snackType, props.message, false)
    };
-   render() {
-      return (
-         <div className={classes.root} >
-            <Snackbar
-               open={this.props.open}
-               autoHideDuration={6000}
-               onClose={this.handleClose}>
-               <Alert
-                  onClose={this.handleClose}
-                  severity={this.props.snackType}
-                  className={classes.alert}>
-                  {this.props.message}
-               </Alert>
-            </Snackbar>
-         </div>
-      );
-   }
+   return (
+      <div className={classes.root} >
+         <Snackbar
+            open={props.open}
+            autoHideDuration={6000}
+            onClose={handleClose}>
+            <Alert
+               onClose={handleClose}
+               severity={props.snackType}
+               className={classes.alert}>
+               {props.message}
+            </Alert>
+         </Snackbar>
+      </div>
+   );
 }
 
 const mapStateToProps = state => {

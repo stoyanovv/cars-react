@@ -88,7 +88,6 @@ export const auth = (data, isSignup) => {
                            const expirationDate = new Date(new Date().getTime() + 3600000)
                            Auth.authenticateUser(token)
                            localStorage.setItem('name', res.name)
-                           localStorage.setItem('sport', res.sport)
                            localStorage.setItem('expirationDate', expirationDate)
                            localStorage.setItem('userId', res.userId)
                            dispatch(authSuccess(token, res.localId))
