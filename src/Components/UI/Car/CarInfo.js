@@ -6,19 +6,18 @@ import styles from './CarInfo.module.css'
 import * as actions from '../../../Store/Actions/index'
 
 const CarInfo = (props) => {
-    const [state, setState] = useState({
+    const state = {
         id: window.localStorage.getItem('userId'),
         carId: props.match.params.id
-    });
+    };
     const [carInfo, setCarInfo] = useState([]);
 
     useEffect(() => {
         Data.get('carinfo/' + state.carId)
             .then(res => {
-                console.log(res);
                 setCarInfo(res);
             })
-    }, []);
+    }, [state.carId]);
 
     const buyHandler = () => {
         Data.post('buycar/' + state.id, { carId: state.carId })
@@ -45,6 +44,11 @@ const CarInfo = (props) => {
     else {
         button = <Button buttonType="Decline" clicked={deleteHandler} >Премахни от покупки</Button>
     }
+
+    const getDate = (date) => {
+        return date ? new Date(Date.parse(date)).toLocaleDateString('sv') : null;
+    }
+
     return (
         <div className={styles.CarInfo}>
             <div className={styles.ImgContainer}>
@@ -54,7 +58,7 @@ const CarInfo = (props) => {
                 <span className={styles.Info}>Марка: {carInfo.make}</span>
                 <span className={styles.Info}>Модел: {carInfo.model}</span>
                 <span className={styles.Info}>Цена: {carInfo.price} лв</span>
-                <span className={styles.Info}>Година: {carInfo.year}</span>
+                <span className={styles.Info}>Година: {getDate(carInfo.year)}</span>
             </div>
             <div className={styles.Description}>
                 <span className={styles.Info}>Гориво: {carInfo.fuel}</span>

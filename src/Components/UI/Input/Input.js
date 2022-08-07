@@ -56,6 +56,7 @@ const Input = (props) => {
                {...props.elementConfig}
                value={props.value}
                onChange={props.changed}
+               onBlur={props.blured}
                placeholder={props.placeholder} >{props.elementConfig.options.map(option => (
                   <option defaultValue={null} key={option.value} value={option.value} disabled={option.disabled} selected={option.selected} hidden={option.hidden} >
                      {option.displayValue}
@@ -71,7 +72,8 @@ const Input = (props) => {
                {...props.elementConfig}
                minLength='2'
                value={props.value}
-               onChange={props.changed} />
+               onChange={props.changed}
+               onBlur={props.blured} />
          </div>
             <div className={styles.ValidationError}>{validationError}</div>
          </span>

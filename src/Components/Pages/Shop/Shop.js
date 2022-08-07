@@ -1,5 +1,5 @@
 import { faCar } from '@fortawesome/free-solid-svg-icons'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Auth from '../Auth/Auth'
 import Data from '../../../Data/Data'
 import Car from '../../UI/Car/Car'
@@ -15,7 +15,8 @@ const Shop = () => {
                 icon: faCar,
                 elementConfig: {
                     options: [
-                        { value: '', displayValue: 'Избери марка', disabled: true, selected: true, hidden: true },
+                        { value: '', disabled: true, defaultValue: 'Избери марка', hidden: true },
+                        { value: 'Избери марка', displayValue: 'Избери марка' },
                         { value: 'Ауди', displayValue: 'Ауди' },
                         { value: 'БМВ', displayValue: 'БМВ' },
                         { value: 'Бугати', displayValue: 'Бугати' },
@@ -38,23 +39,7 @@ const Shop = () => {
     });
     const [cars, setCars] = useState([]);
 
-    useEffect(() => {
-        Data.get('shop', Auth.isUserAuthenticated)
-            .then(res => {
-                loadCars(res);
-            })
-    }, []);
-
-    const searchHandler = (event) => {
-        event.preventDefault()
-        const make = state.inputs.make.value
-        Data.post('search', { make: make }, Auth.isUserAuthenticated)
-            .then(res => {
-                loadCars(res);
-            })
-    };
-
-    const loadCars = (res) => {
+    const loadCars = useCallback((res) => {
         const carsToShow = []
         res.forEach(c => {
             carsToShow.push(
@@ -70,6 +55,29 @@ const Shop = () => {
             )
         })
         setCars(carsToShow);
+    }, [state.props]);
+
+    useEffect(() => {
+        Data.get('shop', Auth.isUserAuthenticated)
+            .then(res => {
+                loadCars(res);
+            })
+    }, [loadCars]);
+
+    const searchHandler = (event) => {
+        event.preventDefault()
+        const make = state.inputs.make.value
+        if (make !== 'Избери марка') {
+            Data.post('search', { make: make }, Auth.isUserAuthenticated)
+                .then(res => {
+                    loadCars(res);
+                });
+        } else {
+            Data.get('shop', Auth.isUserAuthenticated)
+                .then(res => {
+                    loadCars(res);
+                })
+        }
     };
 
     const inputChangedHandler = (event) => {

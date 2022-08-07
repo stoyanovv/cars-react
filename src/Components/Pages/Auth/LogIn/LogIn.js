@@ -42,8 +42,7 @@ const LogIn = (props) => {
             valid: false,
             touched: false
          }
-      },
-      formIsValid: false
+      }
    });
 
    const inputChangedHandler = (event, inputName) => {
@@ -52,19 +51,24 @@ const LogIn = (props) => {
          [inputName]: {
             ...state.inputs[inputName],
             value: event.target.value,
-            valid: checkValidity(event.target.value, state.inputs[inputName].validation),
-            touched: true
+            valid: checkValidity(event.target.value, state.inputs[inputName].validation)
          }
       }
-      let formIsValid = true;
-      for (let inputIdentifier in updatedInputs) {
-
-         formIsValid = updatedInputs[inputIdentifier].valid && formIsValid && updatedInputs[inputIdentifier].touched;
-      }
       setState({
-         inputs: updatedInputs,
-         formIsValid: formIsValid
-      })
+         inputs: updatedInputs
+      });
+   }
+
+   const inputValidateHandler = (inputName) => {
+      setState({
+         inputs: {
+            ...state.inputs,
+            [inputName]: {
+               ...state.inputs[inputName],
+               touched: true
+            }
+         }
+      });
    }
 
    const submitHandler = (event) => {
@@ -95,7 +99,8 @@ const LogIn = (props) => {
          invalid={!formElement.config.valid}
          shouldValidate={formElement.config.validation}
          touched={formElement.config.touched}
-         changed={(event) => inputChangedHandler(event, formElement.id)} />
+         changed={(event) => inputChangedHandler(event, formElement.id)}
+         blured={() => inputValidateHandler(formElement.id)} />
    ))
 
    if (props.loading) {

@@ -59,7 +59,7 @@ const HomePage = () => {
 
          </div>
          <div className={styles.Banner} >
-            <img className={styles.Image} alt='no pic' src={"https://www.autoclub.bg/wp-content/uploads/2022/03/audi-a6-avant-e-tron-concept-front-angle-low-passenger.jpg"} />
+            <img className={styles.Image} alt='no pic' src={"https://www.topgear.com/sites/default/files/2021/08/01%205219-AudiUK00019837AudiA6Avant.jpg"} />
             <div className={styles.BannerHeaders}>
                <div className={styles.BannerHeader}>Регистрирай се сега</div>
                <div className={styles.BannerHeader}>Получи достъп до нашите екслузивни оферти</div>

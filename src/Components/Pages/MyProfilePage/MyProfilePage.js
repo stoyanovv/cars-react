@@ -17,22 +17,27 @@ const MyProfilePage = () => {
    }
    );
    useEffect(() => {
+      let isMounted = true;
       const url = 'myprofile/' + userInfo.id
       Data.get(url, Auth.isUserAuthenticated)
          .then(res => {
             const user = res.myProfileView
-            setUserInfo({
-               id: window.localStorage.getItem('userId'),
-               index: 0,
-               name: user.name,
-               lastName: user.lastName,
-               age: user.age,
-               phoneNumber: user.phoneNumber,
-               email: user.email
+            if (isMounted) {
+               setUserInfo({
+                  id: window.localStorage.getItem('userId'),
+                  index: 0,
+                  name: user.name,
+                  lastName: user.lastName,
+                  age: user.age,
+                  phoneNumber: user.phoneNumber,
+                  email: user.email
+               }
+               )
             }
-            )
          })
-   }, [])
+      return () => { isMounted = false };
+
+   }, [userInfo])
 
    return (
       <div className={styles.MyProfile}>

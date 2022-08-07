@@ -6,7 +6,7 @@ const Footer = () => {
     return (
         <footer className={styles.Footer}>
             <NavItems footer />
-            <div>© Car World Всички права запазени 2021</div>
+            <div>© Car World Всички права запазени 2022</div>
         </footer>
     )
 }

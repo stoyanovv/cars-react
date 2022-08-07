@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react'
 import styles from './ContactsPage.module.css'
 
-const ContactsPage = (props) => {
+const ContactsPage = () => {
     return (
         <div className={styles.ContactsPage}>
             <div className={styles.Info}>
@@ -11,10 +11,10 @@ const ContactsPage = (props) => {
                 <h2>За контакти</h2>
                 <div >Свържете се с нас на номер <br />
                     <FontAwesomeIcon icon={faPhoneAlt} size='1x' color='ocean' /> 0897 999 999
-            </div>
+                </div>
                 <div style={{ marginTop: '30px' }}>
                     Или ни пишете
-            </div>
+                </div>
             </div>
             <form className={styles.Form}>
                 <div className={styles.TwoContainers}>

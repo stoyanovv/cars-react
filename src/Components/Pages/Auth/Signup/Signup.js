@@ -132,7 +132,8 @@ const Signup = (props) => {
             validation: {
                required: true
             },
-            valid: true
+            valid: true,
+            touched: false
          },
          city: {
             elementType: 'select',
@@ -150,7 +151,8 @@ const Signup = (props) => {
             validation: {
                required: true
             },
-            valid: true
+            valid: true,
+            touched: true
          }
       },
       formIsValid: false
@@ -162,8 +164,7 @@ const Signup = (props) => {
          [inputName]: {
             ...state.inputs[inputName],
             value: event.target.value,
-            valid: checkValidity(event.target.value, state.inputs[inputName].validation),
-            touched: true
+            valid: checkValidity(event.target.value, state.inputs[inputName].validation)
          }
       }
       let formIsValid = true;
@@ -177,6 +178,19 @@ const Signup = (props) => {
       })
    }
 
+   const setTouchedHandler = (inputName) => {
+      const toSet = {
+         inputs: {
+            ...state.inputs,
+            [inputName]: {
+               ...state.inputs[inputName],
+               touched: true
+            }
+         },
+         formIsValid: state.formIsValid
+      };
+      setState(toSet)
+   }
 
    const submitHandler = (event) => {
       event.preventDefault()
@@ -206,7 +220,8 @@ const Signup = (props) => {
          invalid={!formElement.config.valid}
          shouldValidate={formElement.config.validation}
          touched={formElement.config.touched}
-         changed={(event) => inputChangedHandler(event, formElement.id)} />)
+         changed={(event) => inputChangedHandler(event, formElement.id)}
+         blured={() => setTouchedHandler(formElement.id)} />)
    )
 
 

@@ -27,6 +27,9 @@ class Data {
          `${baseURL}${url}`,
          options)
          .then(handleJsonResponse)
+         .catch(err => {
+            console.log(err)
+         })
    }
 
    static post(url, data, authenticated = Auth.isUserAuthenticated()) {
@@ -38,6 +41,9 @@ class Data {
          `${baseURL}${url}`,
          options)
          .then(handleJsonResponse)
+         .catch(err => {
+            console.log(err)
+         })
    }
 
    static getToken(url, data) {
@@ -47,6 +53,9 @@ class Data {
       return window.fetch(
          `${baseURL}${url}`,
          options)
+         .catch(err => {
+            console.log(err)
+         })
    }
 }
 

@@ -9,7 +9,7 @@ import Snack from './Components/UI/Snack/Snack'
 const App = (props) => {
    useEffect(() => {
       props.onTryAutoSignIn()
-   }, []);
+   }, [props]);
 
    return (
       <div>

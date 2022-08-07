@@ -12,6 +12,7 @@ const Cart = () => {
     }, []);
 
     useEffect(() => {
+        let isMounted = true;
         Data.get('boughtcars/' + window.localStorage.getItem('userId'))
             .then(res => {
                 const carsInCart = res.cars
@@ -28,13 +29,16 @@ const Cart = () => {
                             imgUrl={c.imgUrl}
                             bought={c.bought} />
                     )
-                })
-                setCart({
-                    cars: cars,
-                    price: res.price
-                })
-            })
-    }, [])
+                });
+                if (isMounted) {
+                    setCart({
+                        cars: cars,
+                        price: res.price
+                    });
+                }
+            });
+        return () => { isMounted = false };
+    }, [cart])
 
     return (
         <div className={styles.Cart}>

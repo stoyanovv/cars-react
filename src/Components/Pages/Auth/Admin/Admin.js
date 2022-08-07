@@ -113,8 +113,8 @@ const Admin = (props) => {
                 validation: {
                     required: true,
                 },
-                valid: false,
-                touched: false
+                valid: true,
+                touched: true
             },
         },
         formIsValid: false
@@ -127,8 +127,7 @@ const Admin = (props) => {
             [inputName]: {
                 ...state.inputs[inputName],
                 value: event.target.value,
-                valid: checkValidity(event.target.value, state.inputs[inputName].validation),
-                touched: true
+                valid: checkValidity(event.target.value, state.inputs[inputName].validation)
             }
         }
         let formIsValid = true;
@@ -140,6 +139,20 @@ const Admin = (props) => {
             inputs: updatedInputs,
             formIsValid: formIsValid
         })
+    }
+
+    const setTouchedHandler = (inputName) => {
+        const toSet = {
+            inputs: {
+                ...state.inputs,
+                [inputName]: {
+                    ...state.inputs[inputName],
+                    touched: true
+                }
+            },
+            formIsValid: state.formIsValid
+        };
+        setState(toSet);
     }
 
     const submitHandler = (event) => {
@@ -186,7 +199,8 @@ const Admin = (props) => {
             invalid={!formElement.config.valid}
             shouldValidate={formElement.config.validation}
             touched={formElement.config.touched}
-            changed={(event) => inputChangedHandler(event, formElement.id)} />)
+            changed={(event) => inputChangedHandler(event, formElement.id)}
+            blured={() => setTouchedHandler(formElement.id)} />)
     )
 
     return (
