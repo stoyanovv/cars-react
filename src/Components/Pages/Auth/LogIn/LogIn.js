@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Input from '../../../UI/Input/Input';
-import { faEnvelope, faLock, } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
 import { checkValidity } from '../../../../Shared/HelperFunctions';
 import { Link, Redirect } from 'react-router-dom';
 import styles from './LogIn.module.css'

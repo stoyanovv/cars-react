@@ -14,12 +14,6 @@ const Layout = (props) => {
       setShowSideDrawer(false);
    }
 
-   // const sideDrawerToggleHandler = () => {
-   //    const setShowSideDrawer = ((prevState) => {
-   //       return !prevState.showSideDrawer
-   //    })
-   // }
-
    const profileDrawerClosedHandler = () => {
       setShowProfileDrawer(false)
    }
@@ -36,7 +30,6 @@ const Layout = (props) => {
          <Toolbar
             open={showSideDrawer}
             isAuth={props.isAuthenticated}
-            // drawerToggleClicked={sideDrawerToggleHandler}
             profileToggleClicked={profileDrawerToggleHandler} />
          <SideDrawer
             isAuth={props.isAuthenticated}

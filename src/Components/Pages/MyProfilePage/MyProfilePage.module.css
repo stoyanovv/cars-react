@@ -59,3 +59,19 @@
     flex-wrap: wrap;
     padding-left: 100px;
 }
+
+.picUrlAndButton {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.PictureUrl {
+    border-radius: 50%;
+    border: 2px solid rgb(167, 162, 162);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #f4eded;
+    max-width: 300px;
+}
