@@ -34,8 +34,13 @@ export const authFail = (error) => {
 }
 
 export const logout = () => {
+   console.log(9)
    localStorage.removeItem('token')
    localStorage.removeItem('expirationDate')
+   localStorage.removeItem('picUrl')
+   localStorage.removeItem('userId')
+   console.log(10)
+
    return {
       type: actionTypes.AUTH_LOGOUT
    }
@@ -92,6 +97,12 @@ export const auth = (data, isSignup) => {
                            localStorage.setItem('userId', res.userId)
                            dispatch(authSuccess(token, res.localId))
                            dispatch(setSnackbar('success', res.message))
+                           Data.get('myprofile/' + window.localStorage.getItem('userId'))
+                              .then(res => {
+                                 localStorage.setItem('picUrl', res.myProfileView.pictureUrl)
+                                 window.location.reload(false);
+
+                              })
                         }
                         else {
                            dispatch(setSnackbar('error', res.message))
@@ -101,6 +112,7 @@ export const auth = (data, isSignup) => {
                         dispatch(setSnackbar('error', 'Има проблем с връзката, моля презаредете страницата!'))
                         dispatch(authFail('Има проблем с връзката, моля презаредете страницата!'))
                      })
+
                }
             })
       }

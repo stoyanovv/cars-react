@@ -1,22 +1,27 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from './HOC/Layout/Layout';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from './Store/Actions/index'
 import Routes from './HOC/Routes/Routes'
 import Snack from './Components/UI/Snack/Snack'
+import { pictureUrl } from './Context/Context'
 
 const App = (props) => {
    useEffect(() => {
       props.onTryAutoSignIn()
    }, [props]);
 
+   const [picUrl, setPicUrl] = useState();
    return (
       <div>
-         <Layout>
-            <Routes isAuth={props.isAuthenticated} />
-         </Layout>
-         <Snack />
+         <pictureUrl.Provider value={{ picUrl, setPicUrl }}>
+
+            <Layout>
+               <Routes isAuth={props.isAuthenticated} />
+            </Layout>
+            <Snack />
+         </pictureUrl.Provider>
       </div>
    )
 }

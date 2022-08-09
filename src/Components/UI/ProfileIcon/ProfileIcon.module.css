@@ -3,7 +3,7 @@
     align-items: center;
     flex-direction: row-reverse;
     padding: 5px 7px 5px 5px;
-    
+
 }
 
 
@@ -17,7 +17,7 @@
     transition: all 0.1s ease;
 }
 
-.Image {
+.ImageDiv {
     display: flex;
     align-self: center;
     justify-content: center;
@@ -30,9 +30,14 @@
     text-align: center;
 }
 
+.Image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
 .UserName {
     color: var(--darkBlue);
     font-size: 15px;
-
     font-weight: 600;
 }
