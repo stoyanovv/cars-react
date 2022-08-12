@@ -57,8 +57,10 @@ const Input = (props) => {
                value={props.value}
                onChange={props.changed}
                onBlur={props.blured}
-               placeholder={props.placeholder} >{props.elementConfig.options.map(option => (
-                  <option defaultValue={null} key={option.value} value={option.value} disabled={option.disabled} selected={option.selected} hidden={option.hidden} >
+               placeholder={props.placeholder}
+               defaultValue={props.elementConfig.defaultValue} >
+               {props.elementConfig.options.map(option => (
+                  <option key={option.value} value={option.value} disabled={option.disabled} hidden={option.hidden} >
                      {option.displayValue}
                   </option>
                ))}

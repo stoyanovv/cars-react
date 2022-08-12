@@ -38,7 +38,7 @@ const Cart = () => {
                 }
             });
         return () => { isMounted = false };
-    }, [])
+    }, [cart.props])
 
     return (
         <div className={styles.Cart}>

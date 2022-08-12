@@ -123,10 +123,11 @@ const Signup = (props) => {
             icon: faVenusMars,
             elementConfig: {
                options: [
-                  { value: '', displayValue: 'Пол', disabled: true, selected: true, hidden: true },
+                  { value: 'gender', displayValue: 'Пол', disabled: true, selected: true, hidden: true },
                   { value: 'MALE', displayValue: 'Мъж' },
                   { value: 'FEMALE', displayValue: 'Жена' }
-               ]
+               ],
+               defaultValue: 'gender'
             },
             value: undefined,
             validation: {
@@ -140,12 +141,13 @@ const Signup = (props) => {
             icon: faCity,
             elementConfig: {
                options: [
-                  { value: '', displayValue: 'Избери град', disabled: true, selected: true, hidden: true },
+                  { value: 'selectCity', displayValue: 'Избери град', disabled: true, selected: true, hidden: true },
                   { value: 'Sofia', displayValue: 'София' },
                   { value: 'Shumen', displayValue: 'Шумен' },
                   { value: 'Varna', displayValue: 'Варна' },
                   { value: 'Burgas', displayValue: 'Бургас' }
-               ]
+               ],
+               defaultValue: 'selectCity'
             },
             value: undefined,
             validation: {

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './MyProfilePage.module.css'
 import Data from '../../../Data/Data'
 import Auth from '../Auth/Auth'
@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { Button } from '@material-ui/core';
 import Input from '../../UI/Input/Input';
-import { pictureUrl } from '../../../Context/Context'
+// import { pictureUrl } from '../../../Context/Context'
 
 
 const MyProfilePage = () => {
@@ -42,10 +42,10 @@ const MyProfilePage = () => {
             }
          });
       return () => { isMounted = false };
-   }, []);
+   }, [userInfo.id]);
 
    const [showPictureField, setShowPictureField] = useState(false);
-   const { setPicUrl } = useContext(pictureUrl);
+   // const { setPicUrl } = useContext(pictureUrl);
 
    let picUrl = '';
    const inputChangedHandler = (event) => {
