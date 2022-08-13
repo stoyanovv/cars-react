@@ -209,7 +209,7 @@ const Admin = (props) => {
             <form onSubmit={submitHandler}>
                 {form}
                 <Button
-                    buttonType='LogIn' submit width='180px' disabled={!state.formIsValid}>Добави авотомобил</Button>
+                    buttonType='LogIn' submit width='180px' disabled={!state.formIsValid}>Добави автомобил</Button>
             </form>
         </div>
     );
